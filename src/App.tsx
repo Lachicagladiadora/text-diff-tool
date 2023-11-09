@@ -44,16 +44,13 @@ function App() {
   return (
     <main
       style={{
-        border: "solid 2px orange",
-        display: "flex",
-        gap: "40px",
-        flexDirection: "column",
-        alignContent: "center",
-        justifyContent: "center",
-        width: "100%",
+        width: '100%',
+        maxWidth: '1000px',
+        margin: 'auto',
+        padding: '20px'
       }}
     >
-      <h1 style={{ fontSize: "20px" }}>String Differentiator</h1>
+      <h1 style={{ fontSize: "20px", marginBottom: '30px' }}>String Differentiator</h1>
       <TextArea
         id="first"
         label="First string:"
@@ -70,7 +67,6 @@ function App() {
       <section
         style={{
           background: COLORS.pink,
-          border: `solid 1px ${COLORS.black}`,
           borderRadius: "4px",
           padding: "5px",
         }}

@@ -9,7 +9,7 @@ type TextAreaProps = {
 
 export const TextArea = ({ value, id, label, setValue }: TextAreaProps) => {
   return (
-    <div style={{ width: "100%", border: "solid 2px red" }}>
+    <div style={{ width: "100%" }}>
       <label
         htmlFor={id}
         style={{ marginBottom: "10px", display: "block", width: "100%" }}
@@ -22,7 +22,6 @@ export const TextArea = ({ value, id, label, setValue }: TextAreaProps) => {
         onChange={(e) => setValue(e.target.value)}
         style={{
           background: COLORS.pink,
-          border: `solid 1px ${COLORS.black}`,
           borderRadius: "4px",
           padding: "5px",
           width: "100%",
