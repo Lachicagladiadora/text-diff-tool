@@ -1,22 +1,44 @@
 import { useState } from "react";
 import { TextArea } from "./components/TextArea";
 import { COLORS } from "./constants";
-import diff from "diff";
+import * as diff from "diff";
+
+type ChartDiffState = 'added' | 'removed' | 'same'
+
+const COLOR_DIFF: { [key in ChartDiffState]: string } = {
+  added: 'green',
+  removed: "red",
+  same: "gray"
+}
+
+type ChartResult = {
+  chart: string,
+  result: ChartDiffState
+}
 
 function App() {
   const [firstValue, setFirstValue] = useState<string>("");
   const [secondValue, setSecondValue] = useState<string>("");
+  const [result, setResult] = useState<ChartResult[]>([])
 
   const onChangeFirst = (newFirstValue: string) => {
-    // 1. actualizar el firstValue state
     setFirstValue(newFirstValue);
-    // 2. llamar a la funcion diff y obtengo la respuesta
-    const difference = diff.diffChars(firstValue, secondValue);
-    difference.forEach((chart) => {
-      console.log(chart);
-      // const color = chart.added ? "green" : chart.removed ? "red" : "gray";
-    });
-    // 3. itero las diferencias y pinto en el tercer panel
+    const difference = diff.diffChars(newFirstValue, secondValue);
+    const newResult = difference.map((chart): ChartResult => ({
+      chart: chart.value,
+      result: chart.added ? "added" : chart.removed ? "removed" : "same"
+    }));
+    setResult(newResult)
+  };
+
+  const onChangeSecond = (newSecondValue: string) => {
+    setSecondValue(newSecondValue);
+    const difference = diff.diffChars(firstValue, newSecondValue);
+    const newResult = difference.map((chart): ChartResult => ({
+      chart: chart.value,
+      result: chart.added ? "added" : chart.removed ? "removed" : "same"
+    }));
+    setResult(newResult)
   };
 
   return (
@@ -36,13 +58,13 @@ function App() {
         id="first"
         label="First string:"
         value={firstValue}
-        setValue={setFirstValue}
+        setValue={onChangeFirst}
       />
       <TextArea
         id="second"
         label="Second string:"
         value={secondValue}
-        setValue={setSecondValue}
+        setValue={onChangeSecond}
       />
       Diff string
       <section
@@ -53,7 +75,7 @@ function App() {
           padding: "5px",
         }}
       >
-        kdfngkdjsgfllo
+        {result.map((cur, idx) => <span key={idx} style={{ color: COLOR_DIFF[cur.result] }}>{cur.chart}</span>)}
       </section>
     </main>
   );
