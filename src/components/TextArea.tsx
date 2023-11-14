@@ -1,4 +1,5 @@
 import { COLORS } from "../constants";
+import { TextAreaStyle } from "./styles/TextAres";
 
 type TextAreaProps = {
   value: string;
@@ -16,7 +17,7 @@ export const TextArea = ({ value, id, label, setValue }: TextAreaProps) => {
       >
         {label}
       </label>
-      <textarea
+      <TextAreaStyle
         id={id}
         value={value}
         onChange={(e) => setValue(e.target.value)}
