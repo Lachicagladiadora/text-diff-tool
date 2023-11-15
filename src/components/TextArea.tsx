@@ -1,5 +1,4 @@
-import { COLORS } from "../constants";
-import { TextAreaStyle } from "./styles/TextAres";
+import { TextAreaStyle } from "./styles/TextArea";
 
 type TextAreaProps = {
   value: string;
@@ -21,12 +20,6 @@ export const TextArea = ({ value, id, label, setValue }: TextAreaProps) => {
         id={id}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        style={{
-          background: COLORS.pink,
-          borderRadius: "4px",
-          padding: "5px",
-          width: "100%",
-        }}
       />
     </div>
   );
